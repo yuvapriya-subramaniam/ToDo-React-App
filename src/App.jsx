@@ -63,6 +63,7 @@ export default function App() {
       </form>
       <h1 className="header">Todo List</h1>
       <ul className="list">
+        {taskList.length === 0 && "...waiting for new tasks..."}
         {taskList.map((taskObj) => (
           <li key={taskObj.id}>
             <label>
