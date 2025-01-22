@@ -4,10 +4,12 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function App() {
   const [newTask, setNewTask] = useState("");
-  const [taskList, setTaskList] = useState([]);
-  // useEffect(() => {
-  //   console.log(taskList);
-  // }, [taskList]);
+  const [taskList, setTaskList] = useState(()=>{
+    return localStorage.getItem("taskList") ? JSON.parse(localStorage.getItem("taskList")) : [];
+  });
+  useEffect(() => {
+    localStorage.setItem("taskList", JSON.stringify(taskList));
+  }, [taskList]);
 
   function addNewTask(e) {
     event.preventDefault();
@@ -61,7 +63,7 @@ export default function App() {
         </div>
         <button className="btn">Add</button>
       </form>
-      <h1 className="header">Todo List</h1>
+      <h1 className="header">Task List</h1>
       <ul className="list">
         {taskList.length === 0 && "...waiting for new tasks..."}
         {taskList.map((taskObj) => (
